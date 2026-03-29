@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRA Diagnostics</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <h2>FRA diagnostic</h2>
+  <div class="nav-actions">
+    <a href="index.html">Home</a>
+    <span style="color: var(--accent); border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.12);">Analysis</span>
+    <a href="http://127.0.0.1:8000/history" target="_blank" rel="noopener">History</a>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="left-col">
+    <section class="card">
+      <h3>Upload sweep</h3>
+      <input type="file" id="csvFile" accept=".csv,.txt">
+      <button type="button" onclick="uploadCSV()">Run analysis</button>
+    </section>
+
+    <section class="card">
+      <h3>Live FRA curve</h3>
+      <canvas id="fraChart"></canvas>
+    </section>
+
+    <section class="card plot-wrap">
+      <h3>Engineering plots</h3>
+      <img id="plot1" alt="Raw FRA">
+      <img id="plot2" alt="Smoothed">
+      <img id="plot3" alt="Slope">
+    </section>
+  </div>
+
+  <aside class="right-col">
+    <section class="card">
+      <h3>Results</h3>
+      <div class="row">FRA class: <span id="fraResult">—</span></div>
+      <div class="row">FDD index: <span id="fddResult">—</span></div>
+      <div class="row">Summary: <span id="finalResult">—</span></div>
+    </section>
+
+    <section class="card">
+      <h3>Severity</h3>
+      <div style="background:#0f172a;height:12px;border-radius:999px;overflow:hidden;border:1px solid var(--border);">
+        <div id="gaugeFill" style="height:12px;width:0%;background:linear-gradient(90deg,var(--accent),#22d3ee);border-radius:999px;"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Explanation</h3>
+      <ul id="explanation"></ul>
+    </section>
+
+    <section class="card">
+      <h3>Export</h3>
+      <button type="button" onclick="generatePDF()">Download PDF</button>
+    </section>
+  </aside>
+</div>
+
+</body>
+</html>

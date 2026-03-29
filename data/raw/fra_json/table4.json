@@ -1,0 +1,32 @@
+[
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| Parameter | Actual | 10% Change | GA   | Error % | PSO  | Error % | 20% Change | GA    | Error % | PSO   | Error % |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| --------- | ------ | ---------- | ---- | ------- | ---- | ------- | ---------- | ----- | ------- | ----- | ------- |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| Rs [Ω]    | 1      | 1          | 1.1  | 10.00   | 1.15 | 15.00   | 1          | 0.92  | 8.00    | 1.05  | 5.00    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| Ls [μH]   | 40     | 40         | 37.5 | 6.25    | 42.2 | 5.50    | 40         | 38.5  | 3.75    | 40.9  | 2.25    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| Csh [pF]  | 2.35   | 2.1        | 1.95 | 7.14    | 2.2  | 4.76    | 1.88       | 1.72  | 8.51    | 1.96  | 4.26    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| Gsh [μS]  | 6.45   | 6.45       | 5.8  | 10.08   | 7.2  | 11.63   | 6.45       | 5.75  | 10.85   | 6.7   | 3.88    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| C0 [pF]   | 20     | 20         | 18.2 | 9.00    | 21   | 5.00    | 20         | 18.3  | 8.50    | 20.85 | 4.25    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| G0 [μS]   | 140    | 140        | 132  | 5.71    | 144  | 2.86    | 140        | 131.5 | 6.07    | 144.8 | 3.43    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| CHL [pF]  | 50     | 55         | 51   | 7.27    | 56.5 | 2.73    | 60         | 63.8  | 6.33    | 63    | 5.00    |"
+  },
+  {
+    "10-kVA HV Winding with 10% and 20% Change": "| GHL [μS]  | 350    | 350        | 346  | 1.14    | 352  | 0.57    | 350        | 346.5 | 1.00    | 351   | 0.29    |"
+  }
+]

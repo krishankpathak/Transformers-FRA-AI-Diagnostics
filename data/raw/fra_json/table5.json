@@ -1,0 +1,68 @@
+[
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "LV Side"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Parameter | Actual | GA     | Error % | PSO    | Error % |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| --------- | ------ | ------ | ------- | ------ | ------- |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Rs [Ω]    | 0.25   | 0.23   | 8.00    | 0.22   | 12.00   |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Ls [μH]   | 10.5   | 12.12  | 15.43   | 11.98  | 14.10   |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Csh [pF]  | 127.67 | 126.43 | 0.97    | 124.54 | 2.45    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Gsh [μS]  | 63.835 | 61.44  | 3.75    | 62.03  | 2.83    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| C0 [pF]   | 115.53 | 116.43 | 0.78    | 117.72 | 1.90    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| G0 [μS]   | 57.765 | 55.32  | 4.23    | 58.91  | 1.98    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| CHL [pF]  | 89.283 | 88.32  | 1.08    | 90.11  | 0.93    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| GHL [μS]  | 44.65  | 42.8   | 4.14    | 45.8   | 2.58    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "HV Side"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Parameter | Actual | GA    | Error % | PSO   | Error % |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| --------- | ------ | ----- | ------- | ----- | ------- |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Rs [Ω]    | 1      | 0.92  | 8.00    | 0.95  | 5.00    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Ls [μH]   | 10     | 9.82  | 1.80    | 10.15 | 1.50    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Csh [pF]  | 393.4  | 396.5 | 0.79    | 394.1 | 0.18    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| Gsh [μS]  | 196.7  | 200   | 1.68    | 198.5 | 0.92    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| C0 [pF]   | 61.19  | 60.92 | 0.44    | 61.85 | 1.08    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| G0 [μS]   | 30.59  | 29.89 | 2.29    | 31.2  | 1.99    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| CHL [pF]  | 89.28  | 88.97 | 0.35    | 88.59 | 0.77    |"
+  },
+  {
+    "40-MVA Transformer LV and HV Healthy Windings": "| GHL [μS]  | 44.65  | 41    | 8.17    | 46    | 3.02    |"
+  }
+]

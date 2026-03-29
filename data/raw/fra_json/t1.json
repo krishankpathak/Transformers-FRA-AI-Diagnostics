@@ -1,0 +1,24 @@
+[
+  {
+    "Comparison between MTL": "| Parameters                             | MTL                                         | Lumped Circuit                              | FEM                                              |"
+  },
+  
+  {
+    "Comparison between MTL": "| Geometry design complexity             | High                                        | High                                        | High                                             |"
+  },
+  {
+    "Comparison between MTL": "| Model representation                   | Numerical approach                          | Electrical parameters in the circuit        | 3-D model                                        |"
+  },
+  {
+    "Comparison between MTL": "| RLC extraction                         | Analytical                                  | Analytical                                  | Numerical field analysis                         |"
+  },
+  {
+    "Comparison between MTL": "| Overvoltage transient analysis / FRA   | Depends on representation of model elements | Depends on representation of model elements | Same model for both FRA and overvoltage analysis |"
+  },
+  {
+    "Comparison between MTL": "| Application Complexity                 | Mid                                         | High                                        | Low                                              |"
+  },
+  {
+    "Comparison between MTL": "| Simulation time for frequency response | Mid                                         | Low                                         | High                                             |"
+  }
+]

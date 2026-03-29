@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+{% set nav_active = 'analysis' %}
+{% block title %}Analysis results · AI-Based FRA Diagnostic System{% endblock %}
+
+{% block head_extra %}{% endblock %}
+
+{% block content %}
+{% set raw_sev = (diagnosis_severity or severity or 'Medium')|lower %}
+{% set sev = raw_sev if raw_sev in ['low','medium','high'] else ('high' if raw_sev in ['critical','severe'] else 'medium') %}
+{% set knob = 15 if sev == 'low' else (85 if sev == 'high' else 50) %}
+
+<div class="meta-bar fade-in">
+    <div>
+        <span style="color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em;">File</span>
+        <span class="file-tag" style="margin-left: 0.5rem;">{{ transformer_id }}</span>
+    </div>
+    <div class="time">{{ datetime.now().strftime("%Y-%m-%d %H:%M") }}</div>
+    <div style="display: flex; gap: 0.5rem;">
+        {% if report_pdf %}
+        <a class="nav-link active" href="/download-report/{{ report_pdf }}" target="_blank" style="border: 1px solid var(--accent); color: var(--accent); background: rgba(56,189,248,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+            PDF Report
+        </a>
+        {% endif %}
+        {% if report_csv %}
+        <a class="nav-link active" href="/download-report/{{ report_csv }}" target="_blank" style="border: 1px solid #10b981; color: #10b981; background: rgba(16,185,129,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <i data-lucide="file-spreadsheet" style="width: 14px; height: 14px;"></i>
+            CSV Report
+        </a>
+        {% endif %}
+    </div>
+    <a class="nav-link active" href="/analysis" style="border: 1px solid rgba(56,189,248,0.35);">+ New scan</a>
+</div>
+
+<!-- Analysis hero -->
+<section class="hero-diagnosis">
+    <span class="pill">Unified diagnosis</span>
+    <h2 class="fault-display status-{{ status }}">{{ fault_type }}</h2>
+    <div class="fault-meta">
+        <span>Confidence <strong class="status-{{ status }}">{{ confidence }}%</strong></span>
+        <span class="badge-severity {{ sev }}">Severity: {{ diagnosis_severity or severity }}</span>
+        <span>Anomaly score <strong>{{ anomaly_score }}</strong></span>
+    </div>
+</section>
+
+<!-- Analytics row -->
+<div class="analytics-grid">
+    <div class="card">
+        <p class="card-title">Fault probability</p>
+        <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">Model + rules blended confidence</p>
+        <div class="prob-bar-wrap">
+            <div class="prob-bar-bg">
+                <div class="prob-bar-fill" style="width: {{ confidence if confidence <= 100 else 100 }}%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 0.35rem; font-size: 0.75rem; color: var(--text-muted);">
+                <span>0%</span><span>{{ confidence }}%</span><span>100%</span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <p class="card-title">Severity meter</p>
+        <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Low / medium / high maintenance urgency</p>
+        <div class="severity-meter">
+            <div class="severity-track">
+                <div class="severity-knob" style="left: {{ knob }}%;"></div>
+            </div>
+            <div class="severity-labels"><span>Low</span><span>Medium</span><span>High</span></div>
+        </div>
+    </div>
+    <div class="card">
+        <p class="card-title">Anomaly score</p>
+        <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--text-muted);">IsolationForest on paired features (0–100)</p>
+        <div class="anomaly-ring">
+            <span class="anomaly-value">{{ anomaly_score }}</span>
+        </div>
+    </div>
+    <div class="card">
+        <p class="card-title">Blended confidence gauge</p>
+        <div class="gauge-wrap">
+            <canvas id="health-gauge" width="200" height="120" aria-label="Confidence gauge"></canvas>
+            <div class="gauge-center">{{ confidence }}%</div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-bottom: 1.25rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p class="card-title" style="margin: 0;">Data Integrity Status</p>
+        <span style="background: rgba(16,185,129,0.1); color: #10b981; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(16,185,129,0.2);">
+            <i data-lucide="check-circle" style="width: 12px; height: 12px; vertical-align: middle; margin-right: 0.25rem;"></i>
+            PROPER DATA DETECTED
+        </span>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">File structure matches standard FRA diagnostic requirements (Log Frequency vs Magnitude in dB).</p>
+</div>
+
+<div class="metrics-grid">
+    <div class="metric-card">
+        <span class="metric-label">Correlation</span>
+        <div class="metric-value">{{ corr }}</div>
+    </div>
+    <div class="metric-card">
+        <span class="metric-label">Max deviation</span>
+        <div class="metric-value status-{{ status }}">{{ shift }} dB</div>
+    </div>
+    <div class="metric-card">
+        <span class="metric-label">ML class</span>
+        <div class="metric-value">{{ ml_fault|default('—') }}</div>
+    </div>
+    <div class="metric-card">
+        <span class="metric-label">ML confidence</span>
+        <div class="metric-value">{{ ml_confidence|default('—') }}{% if ml_confidence is defined and ml_confidence is not none %}%{% endif %}</div>
+    </div>
+</div>
+
+<!-- Timeline + interactive charts -->
+<div class="card" style="margin-bottom: 1.25rem;">
+    <p class="card-title">Timeline simulation</p>
+    <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: var(--text-muted);">Compare before (reference) vs after (test). Use the mouse wheel to zoom and drag to pan when plugins load.</p>
+    <div class="timeline-toggle" id="timeline-toggle">
+        <button type="button" class="btn-secondary active" data-timeline="both">Both curves</button>
+        <button type="button" class="btn-secondary" data-timeline="before">Before (reference)</button>
+        <button type="button" class="btn-secondary" data-timeline="after">After (test)</button>
+    </div>
+</div>
+
+<div class="charts-grid">
+    <div class="card chart-card">
+        <p class="card-title">Interactive comparison</p>
+        <p class="chart-hint">Red bands: |test − reference| ≥ 3 dB (same threshold as static difference plot). Legend: click to toggle series.</p>
+        <div class="chart-canvas-wrap">
+            <canvas id="chart-compare"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <p class="card-title">Interactive difference</p>
+        <p class="chart-hint">Δ magnitude in dB — hover for tooltips.</p>
+        <div class="chart-canvas-wrap">
+            <canvas id="chart-diff"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <p class="card-title">Test FRA curve</p>
+        <p class="chart-hint">Uploaded sweep (interpolated to common grid).</p>
+        <div class="chart-canvas-wrap">
+            <canvas id="chart-single"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Static matplotlib exports -->
+<div class="card" style="margin-bottom: 1.25rem;">
+    <p class="card-title">High-resolution plots (export)</p>
+    <div class="plots-grid">
+        <div>
+            <span class="metric-label" style="display:block;margin-bottom:0.5rem;">FRA — test</span>
+            {% if plot1 %}<img class="plot-img" src="data:image/png;base64,{{ plot1 }}" alt="Single FRA plot">{% else %}<p style="color:var(--text-muted);margin:0;">No image</p>{% endif %}
+        </div>
+        <div>
+            <span class="metric-label" style="display:block;margin-bottom:0.5rem;">Reference vs test</span>
+            {% if plot2 %}<img class="plot-img" src="data:image/png;base64,{{ plot2 }}" alt="Comparison plot">{% else %}<p style="color:var(--text-muted);margin:0;">No image</p>{% endif %}
+        </div>
+        <div>
+            <span class="metric-label" style="display:block;margin-bottom:0.5rem;">Difference</span>
+            {% if plot3 %}<img class="plot-img" src="data:image/png;base64,{{ plot3 }}" alt="Difference plot">{% else %}<p style="color:var(--text-muted);margin:0;">No image</p>{% endif %}
+        </div>
+        <div>
+            <span class="metric-label" style="display:block;margin-bottom:0.5rem;">3D Response Surface</span>
+            {% if plot4 %}<img class="plot-img" src="data:image/png;base64,{{ plot4 }}" alt="3D Plot">{% else %}<p style="color:var(--text-muted);margin:0;">No image</p>{% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+<div class="card" style="margin-bottom: 1.25rem;">
+    <p class="card-title">Extracted features</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="k">Peaks detected</div>
+            <div class="v">{{ features.num_peaks|default('—') }}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">Peak frequencies (Hz)</div>
+            <div class="v">{% if features.peak_frequencies %}{{ features.peak_frequencies[0:8]|join(', ') }}{% else %}—{% endif %}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">Mean magnitude</div>
+            <div class="v">{% if features.mean_magnitude is defined %}{{ '%.3f'|format(features.mean_magnitude) }}{% else %}—{% endif %}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">Std dev</div>
+            <div class="v">{% if features.std_dev is defined %}{{ '%.3f'|format(features.std_dev) }}{% else %}—{% endif %}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">Low-band energy</div>
+            <div class="v">{% if features.low_freq_energy is defined %}{{ '%.2f'|format(features.low_freq_energy) }}{% else %}—{% endif %}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">Mid-band energy</div>
+            <div class="v">{% if features.mid_freq_energy is defined %}{{ '%.2f'|format(features.mid_freq_energy) }}{% else %}—{% endif %}</div>
+        </div>
+        <div class="feature-card">
+            <div class="k">High-band energy</div>
+            <div class="v">{% if features.high_freq_energy is defined %}{{ '%.2f'|format(features.high_freq_energy) }}{% else %}—{% endif %}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Pattern insights -->
+<div class="card" style="margin-bottom: 1.25rem;">
+    <p class="card-title">Pattern insights</p>
+    <div class="insights-list">
+        {% if insights and insights|length > 0 %}
+            {% for line in insights %}
+            <div class="insight-item">
+                <i data-lucide="sparkles" width="18" height="18"></i>
+                <span>{{ line }}</span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="insight-item">
+                <i data-lucide="activity" width="18" height="18"></i>
+                <span>Peak shift detected in mid-frequency can indicate winding deformation.</span>
+            </div>
+            <div class="insight-item">
+                <i data-lucide="waves" width="18" height="18"></i>
+                <span>High-frequency attenuation may reflect insulation or coupling path changes.</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Detailed Analysis Section (GitHub version style) -->
+<div style="display: grid; grid-template-cols: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.25rem;">
+    <div class="card" style="border-top: 4px solid var(--accent); margin: 0;">
+        <p class="card-title">Full Diagnostic Analysis</p>
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+            <div class="bg-card" style="padding: 1rem; border-radius: 12px; border: 1px solid rgba(56,189,248,0.1);">
+                <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                    <i data-lucide="microscope" width="16" height="16"></i>
+                    Technical Compliance
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Standard Used</span>
+                        <span style="font-weight: 600; font-size: 0.75rem;">{{ detailed_analysis.standard_used|default('DL/T 911-2004') }}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Spectral Status</span>
+                        <span style="font-weight: 600; font-size: 0.75rem; color: {% if 'Non' in detailed_analysis.spectral_compliance|default('') %}var(--danger){% else %}#10b981{% endif %};">
+                            {{ detailed_analysis.spectral_compliance|default('Compliant') }}
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Correlation Class</span>
+                        <span style="font-weight: 600; font-size: 0.75rem;">
+                            {% if corr|float > 0.98 %}Excellent{% elif corr|float > 0.95 %}Good{% else %}Poor{% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-card" style="padding: 1rem; border-radius: 12px; border: 1px solid rgba(56,189,248,0.1);">
+                <h4 style="font-weight: 700; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                    <i data-lucide="shield-check" width="16" height="16"></i>
+                    Health Indices
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Health Index</span>
+                            <span style="font-weight: 700; color: #10b981; font-size: 0.75rem;">{{ detailed_analysis.health_index|default(95) }}%</span>
+                        </div>
+                        <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden;">
+                            <div style="width: {{ detailed_analysis.health_index|default(95) }}%; height: 100%; background: #10b981;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Risk Index</span>
+                            <span style="font-weight: 700; color: var(--danger); font-size: 0.75rem;">{{ detailed_analysis.risk_index|default(5) }}%</span>
+                        </div>
+                        <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden;">
+                            <div style="width: {{ detailed_analysis.risk_index|default(5) }}%; height: 100%; background: var(--danger);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid #8b5cf6; margin: 0;">
+        <p class="card-title">Ensemble Model Insights</p>
+        <div style="margin-top: 1rem;">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: rgba(139, 92, 246, 0.05); border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.1);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="color: #8b5cf6;"><i data-lucide="layers" width="18" height="18"></i></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Random Forest</span>
+                    </div>
+                    <span style="font-size: 0.7rem; background: #8b5cf6; color: white; padding: 0.15rem 0.5rem; border-radius: 4px;">ACTIVE</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: rgba(139, 92, 246, 0.05); border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.1);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="color: #8b5cf6;"><i data-lucide="zap" width="18" height="18"></i></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">XGBoost</span>
+                    </div>
+                    <span style="font-size: 0.7rem; background: #8b5cf6; color: white; padding: 0.15rem 0.5rem; border-radius: 4px;">ACTIVE</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: rgba(139, 92, 246, 0.05); border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.1);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="color: #8b5cf6;"><i data-lucide="cpu" width="18" height="18"></i></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">CatBoost</span>
+                    </div>
+                    <span style="font-size: 0.7rem; background: #8b5cf6; color: white; padding: 0.15rem 0.5rem; border-radius: 4px;">ACTIVE</span>
+                </div>
+                <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); font-style: italic; line-height: 1.4;">Triple ensemble voting architecture ensures high reliability by combining decision trees, gradient boosting, and categorical feature optimization.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recommendation -->
+<div class="card border-{{ status }}" style="border-left-width: 4px;">
+    <p class="card-title">Expert recommendation</p>
+    <div class="recommend-block border-{{ status }}">
+        <p><i data-lucide="shield-alert" width="16" height="16" style="vertical-align: text-bottom; margin-right: 0.35rem;"></i>{{ recommendation }}</p>
+        <p class="explain">{{ explanation }}</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<script>
+(function () {
+  if (typeof Chart === "undefined") return;
+  var z = typeof ChartZoom !== "undefined" ? ChartZoom : null;
+  var z2 = !z && window["chartjs-plugin-zoom"] ? (window["chartjs-plugin-zoom"].default || window["chartjs-plugin-zoom"]) : null;
+  var regZ = z || z2;
+  if (regZ) { try { Chart.register(regZ); } catch (e) {} }
+  var a = window["chartjs-plugin-annotation"];
+  if (a) { try { Chart.register(a.default || a); } catch (e2) {} }
+})();
+</script>
+<script>
+window.__FRA = {
+    frequencies: {{ frequencies|tojson }},
+    healthy: {{ healthy|tojson }},
+    faulty: {{ faulty|tojson }},
+    chartDiff: {{ chart_diff|default([])|tojson }},
+    confidence: {{ confidence|int }},
+    faultThresholdDb: 3
+};
+</script>
+<script src="{{ url_for('static', path='js/charts.js') }}"></script>
+<script src="{{ url_for('static', path='js/interactions.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI FRA Diagnostic System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="landing">
+    <h1>Transformer <span style="color: var(--accent);">FRA</span> AI System</h1>
+    <p class="sub">Frequency Response Analysis and intelligent diagnostics for power transformers — upload sweeps, compare to baseline, and review ML-assisted interpretations.</p>
+    <button type="button" onclick="start()">Open diagnostics</button>
+    <p class="hint">For the full experience (landing, history, interactive charts), run the API from the project folder — <code style="color: var(--accent);">python -m uvicorn api.main:app --reload</code> — then open <a href="http://127.0.0.1:8000/">127.0.0.1:8000</a>.</p>
+  </div>
+  <script>
+    function start() {
+      window.location.href = "analysis.html";
+    }
+  </script>
+</body>
+</html>

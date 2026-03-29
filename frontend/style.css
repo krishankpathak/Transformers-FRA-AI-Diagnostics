@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap");
+
+:root {
+  --bg: #0b1120;
+  --card: #1e293b;
+  --accent: #38bdf8;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.14);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 120% 80% at 50% -25%, rgba(56, 189, 248, 0.1), transparent 52%),
+    radial-gradient(ellipse 90% 50% at 100% 20%, rgba(30, 41, 59, 0.5), transparent);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* —— Nav —— */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.navbar .nav-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navbar a,
+.navbar span[role="button"] {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar a:hover,
+.navbar span:hover {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text);
+}
+
+.layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.card h3 {
+  margin: 0 0 1rem;
+  font-size: 0.65rem;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card .row {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  color: var(--muted);
+}
+
+.card .row span:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#fraChart {
+  display: block;
+  width: 100% !important;
+  height: 280px !important;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+}
+
+.plot-wrap img {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0f172a;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.65rem;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0ea5e9, var(--accent));
+  color: #0f172a;
+  box-shadow: 0 4px 24px rgba(56, 189, 248, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.45);
+}
+
+#gaugeFill {
+  transition: width 0.6s ease;
+}
+
+#explanation {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+#explanation li {
+  margin-bottom: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Landing */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.landing h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.landing .sub {
+  color: var(--muted);
+  max-width: 26rem;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+}
+
+.landing .hint {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  max-width: 28rem;
+}
+
+.landing .hint a {
+  color: var(--accent);
+}

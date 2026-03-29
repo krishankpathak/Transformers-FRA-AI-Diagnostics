@@ -1,0 +1,23 @@
+[
+  {
+    "RLC Parameters (MTL Model)": "| Parameter                     | Value     |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Turn-to-turn capacitance (Ct) | 33.5 pF   |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Inter-disc capacitance (Cd)   | 526.89 μF |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Series capacitance (Cs)       | 208.68 μF |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Series resistance (Rs)        | 4.67 Ω    |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Conductance (Gs)              | 131.12 μΩ |"
+  },
+  {
+    "RLC Parameters (MTL Model)": "| Inductance (L matrix)         | 96 × 96   |"
+  }
+]

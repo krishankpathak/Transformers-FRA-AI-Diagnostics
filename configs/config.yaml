@@ -1,0 +1,7 @@
+paths:
+  fra_model: "models/fra_model/fra_model.pkl"
+  fdd_model: "models/rul_model/fdd_model.pkl"
+
+api:
+  host: "127.0.0.1"
+  port: 8000

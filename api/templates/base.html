@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI-Based FRA Diagnostic System{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <div class="app-shell">
+        <header class="dash-header">
+            <div class="dash-brand">
+                <div class="dash-brand-logo">
+                    <img src="/static/images/logo.svg" alt="FRA diagnostic logo" width="120" height="120" decoding="async">
+                </div>
+                <div>
+                    <h1>AI-Based FRA Diagnostic System</h1>
+                    <p class="dash-sub">Frequency response · ML · Expert rules</p>
+                </div>
+            </div>
+            <nav class="dash-nav" aria-label="Main">
+                <a class="nav-link{% if nav_active == 'home' %} active{% endif %}" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link{% if nav_active == 'analysis' %} active{% endif %}" href="{{ url_for('diagnosis_dashboard') }}">Diagnostics</a>
+                <a class="nav-link{% if nav_active == 'history' %} active{% endif %}" href="{{ url_for('history_page') }}">History</a>
+                <a class="nav-link{% if nav_active == 'about' %} active{% endif %}" href="{{ url_for('about') }}">About</a>
+            </nav>
+            <div class="status-pill" title="Application status">
+                <span class="dot" aria-hidden="true"></span>
+                <span>System Ready</span>
+            </div>
+        </header>
+
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block scripts %}{% endblock %}
+    <script>lucide.createIcons();</script>
+</body>
+</html>

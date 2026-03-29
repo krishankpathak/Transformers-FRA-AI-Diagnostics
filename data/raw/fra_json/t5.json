@@ -1,0 +1,57 @@
+[
+  {
+    "(Measured vs MTL)": "| Frequency (Hz) | Measured (dB) | MTL (dB)                      |"
+  },
+  {
+    "(Measured vs MTL)": "| 20             | 0.00          | 4.50                          |"
+  },
+  {
+    "(Measured vs MTL)": "| 50             | -4.00         | 1.20                          |"
+  },
+  {
+    "(Measured vs MTL)": "| 100            | -8.50         | -3.00                         |"
+  },
+  {
+    "(Measured vs MTL)": "| 500            | -18.00        | -12.50                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 1",
+    "undefined": "000          | -22.00        | -17.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 5",
+    "undefined": "000          | -32.00        | -25.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 10",
+    "undefined": "000         | -38.00        | -30.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 50",
+    "undefined": "000         | -50.00        | -42.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 100",
+    "undefined": "000        | -58.00        | -48.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 200",
+    "undefined": "000        | -65.00        | -80.00 *(anti-resonance dip)* |"
+  },
+  {
+    "(Measured vs MTL)": "| 300",
+    "undefined": "000        | -60.00        | -55.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 500",
+    "undefined": "000        | -55.00        | -50.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 1",
+    "undefined": "000      | -48.00        | -42.00                        |"
+  },
+  {
+    "(Measured vs MTL)": "| 2",
+    "undefined": "000      | -45.00        | -40.00                        |"
+  }
+]

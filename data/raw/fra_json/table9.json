@@ -1,0 +1,32 @@
+[
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| Parameter | Phase A GA | Phase A PSO | Phase B GA | Phase B PSO | Phase C GA | Phase C PSO |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| --------- | ---------- | ----------- | ---------- | ----------- | ---------- | ----------- |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| Rs [Ω]    | 1.1        | 0.98        | 0.99       | 0.96        | 0.91       | 0.89        |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| Ls [μH]   | 113        | 110         | 117        | 113         | 55         | 53          |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| Csh [pF]  | 558        | 560         | 559        | 565         | 576        | 573         |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| Gsh [μS]  | 2.41       | 2.5         | 2.11       | 2.34        | 2.46       | 2.4         |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| C0 [pF]   | 32         | 33.4        | 33         | 30.2        | 37         | 35          |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| G0 [μS]   | 862        | 875.6       | 876        | 882         | 889.5      | 879         |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| CHL [pF]  | 1085       | 1113        | 1140       | 1118        | 1139       | 1130        |"
+  },
+  {
+    "Estimated Parameters of 45-MVA Transformer HV Windings": "| GHL [μS]  | 527        | 538.5       | 539        | 543         | 576        | 548         |"
+  }
+]

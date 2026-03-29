@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRA | Analysis History</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap');
+        
+        body { background-color: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-card { background-color: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.5); backdrop-filter: blur(10px); }
+        .text-mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.7rem; font-weight: bold; }
+        
+        /* Fixed colors from the image (sky, emerald, red, amber) */
+        .text-primary { color: #0ea5e9; } 
+    </style>
+</head>
+<body class="p-8 md:p-16">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-16 p-4 glass-card rounded-full px-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center bg-slate-100 border border-slate-600/50 shrink-0 p-0.5">
+                    <img src="/static/images/logo.svg" alt="FRA diagnostic logo" class="w-full h-full object-contain" width="120" height="120" decoding="async">
+                </div>
+                <div>
+                    <h1 class="text-xs font-bold text-white uppercase tracking-tight">FRA Diagnostics</h1>
+                    <p class="text-[9px] text-slate-500 font-mono tracking-widest">AI Platform</p>
+                </div>
+            </div>
+            <nav class="flex gap-4 text-xs font-semibold">
+                <a href="/" class="text-slate-400 hover:text-white transition">Home</a>
+                <a href="/analysis" class="text-slate-400 hover:text-white transition">Analysis</a>
+                <a href="/history" class="text-white bg-sky-600 px-3 py-1 rounded-full">History</a>
+            </nav>
+            <a href="/about" class="text-xs font-mono text-slate-400 hover:text-white">ABOUT SYSTEM</a>
+        </header>
+
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+            <div>
+                <p class="text-mono text-sky-500 mb-1">RECORDS</p>
+                <h1 class="text-4xl font-extrabold text-white tracking-tighter leading-tight">Analysis History</h1>
+            </div>
+            <a href="/analysis" class="tech-font inline-flex items-center gap-2 px-5 py-2.5 bg-sky-600 rounded-lg hover:bg-sky-500 transition text-sm font-bold text-white shadow-lg shadow-sky-900/40">
+                <i data-lucide="plus" class="w-4 h-4"></i> NEW ANALYSIS
+            </a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="glass-card p-6 rounded-xl flex flex-col items-center">
+                <h2 class="text-4xl font-extrabold text-white">{{ reports|length }}</h2>
+                <p class="text-mono text-slate-500 mt-2">REPORTS GENERATED</p>
+            </div>
+            
+            <div class="glass-card p-6 rounded-xl flex flex-col items-center border-b-2 border-emerald-500">
+                <h2 class="text-4xl font-extrabold text-emerald-400">Stable</h2>
+                <p class="text-mono text-emerald-500 mt-2">SYSTEM STATUS</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl flex flex-col items-center border-b-2 border-amber-500">
+                <h2 class="text-4xl font-extrabold text-amber-400">AI</h2>
+                <p class="text-mono text-amber-500 mt-2">DIAGNOSTIC ENGINE</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl flex flex-col items-center border-b-2 border-red-500">
+                <h2 class="text-4xl font-extrabold text-red-400">Live</h2>
+                <p class="text-mono text-red-500 mt-2">MONITORING</p>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-xl overflow-hidden mb-20 shadow-xl shadow-black/30">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-slate-900/50 text-mono text-slate-500">
+                    <tr>
+                        <th class="p-5 border-b border-slate-800">Report Filename</th>
+                        <th class="p-5 border-b border-slate-800">Type</th>
+                        <th class="p-5 border-b border-slate-800">Generation Date</th>
+                        <th class="p-5 border-b border-slate-800">File Size</th>
+                        <th class="p-5 border-b border-slate-800 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm font-medium">
+                    {% for report in reports %}
+                    <tr class="hover:bg-slate-800/30 transition">
+                        <td class="p-5 border-b border-slate-800 text-white font-bold">
+                            <i data-lucide="{% if report.type == 'PDF' %}file-text{% else %}file-spreadsheet{% endif %}" class="inline w-4 h-4 mr-2 text-sky-500"></i>
+                            {{ report.filename }}
+                        </td>
+                        <td class="p-5 border-b border-slate-800">
+                            <span class="px-2 py-1 rounded text-[10px] font-bold {% if report.type == 'PDF' %}bg-sky-500/10 text-sky-400{% else %}bg-emerald-500/10 text-emerald-400{% endif %}">
+                                {{ report.type }}
+                            </span>
+                        </td>
+                        <td class="p-5 border-b border-slate-800 font-mono text-slate-400">{{ report.date }}</td>
+                        <td class="p-5 border-b border-slate-800 text-slate-400">{{ report.size }}</td>
+                        <td class="p-5 border-b border-slate-800 text-right">
+                            <a href="/download-report/{{ report.filename }}" target="_blank" class="px-3 py-1 bg-sky-600/20 text-sky-400 border border-sky-600/30 rounded-md hover:bg-sky-600 hover:text-white transition text-xs font-bold">
+                                <i data-lucide="download" class="inline w-3 h-3 mr-1"></i> VIEW {{ report.type }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="p-20 text-center text-slate-500 italic">
+                            <i data-lucide="folder-open" class="w-12 h-12 mx-auto mb-4 opacity-20"></i>
+                            No diagnostic reports found in history.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+                        <td class="p-5 border-b border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-20 bg-slate-800 h-1 rounded-full"><div class="bg-emerald-500 h-1 rounded-full" style="width: 94%"></div></div>
+                                <span class="font-bold text-emerald-400 font-mono">94</span>
+                            </div>
+                        </td>
+                        <td class="p-5 border-b border-slate-800"><span class="px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono">Healthy</span></td>
+                        <td class="p-5 border-b border-slate-800 text-emerald-400 font-bold">0</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/30 transition">
+                        <td class="p-5 border-b border-slate-800 text-white font-bold">TX-2023-1134</td>
+                        <td class="p-5 border-b border-slate-800 font-mono text-slate-400">2026-03-15</td>
+                        <td class="p-5 border-b border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-20 bg-slate-800 h-1 rounded-full"><div class="bg-red-500 h-1 rounded-full" style="width: 45%"></div></div>
+                                <span class="font-bold text-red-400 font-mono">45</span>
+                            </div>
+                        </td>
+                        <td class="p-5 border-b border-slate-800"><span class="px-2 py-1 bg-red-500/10 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono">Fault</span></td>
+                        <td class="p-5 border-b border-slate-800 text-red-400 font-bold">5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="mt-20 pt-8 border-t border-slate-900 text-center">
+            <p class="text-mono text-slate-700 font-semibold uppercase">FRA Diagnostics • industrial secure records v1.2</p>
+        </footer>
+    </div>
+    
+    <script>lucide.createIcons();</script>
+</body>
+</html>

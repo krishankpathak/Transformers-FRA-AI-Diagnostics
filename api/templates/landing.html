@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRA Diagnostics | AI-Powered Transformer Analysis</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap');
+        
+        :root {
+            --primary: #0ea5e9;
+            --background: #020617;
+            --card: #1e293b;
+        }
+
+        body {
+            background-color: var(--background);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .bg-card { background-color: #0f172a; border: 1px solid #1e293b; }
+        .text-primary { color: var(--primary); }
+        
+        .glow-active {
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-lg overflow-hidden flex items-center justify-center bg-slate-100 border border-slate-600/50 shadow-lg shrink-0 p-0.5">
+                    <img src="/static/images/logo.svg" alt="FRA diagnostic logo" class="w-full h-full object-contain" width="120" height="120" decoding="async">
+                </div>
+                <div>
+                    <h1 class="text-base font-bold tracking-tight text-white uppercase">FRA Diagnostics</h1>
+                    <p class="text-[10px] text-slate-400 tracking-widest uppercase font-mono">AI-Powered Transformer Analysis</p>
+                </div>
+            </div>
+            
+            <nav class="flex items-center gap-2">
+                <a href="/" class="px-5 py-2 rounded-full text-xs font-semibold bg-sky-600 text-white">HOME</a>
+                <a href="/analysis" class="px-5 py-2 rounded-full text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-all">DIAGNOSTICS</a>
+                <a href="/history" class="px-5 py-2 rounded-full text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-all">HISTORY</a>
+                <a href="/about" class="px-5 py-2 rounded-full text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-all">ABOUT</a>
+            </nav>
+
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800">
+                <div class="w-2 h-2 rounded-full bg-green-500 pulse-dot"></div>
+                <span class="text-xs text-slate-300">System Online</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 pt-24 pb-16 text-center border-b border-slate-900">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 mb-10">
+            <i data-lucide="brain-circuit" class="w-4 h-4 text-sky-400"></i>
+            <span class="text-xs font-bold text-sky-400 tracking-wider uppercase font-mono">AI-POWERED DIAGNOSTICS</span>
+        </div>
+        <h2 class="text-5xl font-extrabold text-white tracking-tighter leading-tight max-w-4xl mx-auto mb-6">
+            Intelligent Transformer <span class="text-primary">FRA Analysis</span>
+        </h2>
+        <p class="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+            Automated processing and interpretation of Frequency Response Analysis data from multiple vendors. Detect winding deformation, core displacement, and insulation degradation with machine learning precision.
+        </p>
+        
+        <div class="flex gap-4 justify-center">
+            <a href="/analysis" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm px-8 py-3 rounded-lg btn-glow transition-all">START ANALYSIS</a>
+            <a href="/about" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm px-8 py-3 rounded-lg transition-all border border-slate-700">LEARN MORE</a>
+        </div>
+    </section>
+
+    <section class="border-b border-slate-900">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-800">
+            <div class="px-4">
+                <p class="text-3xl font-extrabold text-white">20Hz – 2MHz</p>
+                <p class="text-xs text-slate-500 uppercase font-mono mt-1">FREQUENCY RANGE</p>
+            </div>
+            <div class="px-4">
+                <p class="text-3xl font-extrabold text-white">4+</p>
+                <p class="text-xs text-slate-500 uppercase font-mono mt-1">VENDOR FORMATS</p>
+            </div>
+            <div class="px-4">
+                <p class="text-3xl font-extrabold text-white">Under 3s</p>
+                <p class="text-xs text-slate-500 uppercase font-mono mt-1">ANALYSIS TIME</p>
+            </div>
+            <div class="px-4">
+                <p class="text-3xl font-extrabold text-white">95%+</p>
+                <p class="text-xs text-slate-500 uppercase font-mono mt-1">DETECTION ACCURACY</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-20 text-center">
+        <p class="text-[10px] text-sky-500 font-bold uppercase tracking-widest mb-2 font-mono">CAPABILITIES</p>
+        <h3 class="text-3xl font-bold text-white mb-16 tracking-tight">Platform Features</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="refresh-ccw" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">Universal Data Parser</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">Automatically process FRA data from OMICRON, Megger, Doble, and generic CSV formats into a standardized structure.</p>
+            </div>
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="brain" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">AI Fault Detection</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">CNN-based models and anomaly detection algorithms trained on curated FRA signatures to classify fault types with high accuracy.</p>
+            </div>
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="presentation" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">Interactive Visualization</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">Compare reference and test frequency response curves with logarithmic scaling, overlay analysis, and deviation highlighting.</p>
+            </div>
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="settings" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">Expert System Logic</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">Automated interpretation of results with severity-based maintenance recommendations and actionable insights.</p>
+            </div>
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="bar-chart-3" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">Health Scoring</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">Composite health index combining correlation coefficients, spectral deviation, and fault probability into a single score.</p>
+            </div>
+            <div class="bg-card p-8 rounded-2xl space-y-4">
+                <i data-lucide="server-crash" class="w-8 h-8 text-sky-400 p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"></i>
+                <h4 class="text-lg font-bold text-white tracking-tight">Multi-Vendor Support</h4>
+                <p class="text-sm text-slate-400 leading-relaxed">Seamless compatibility with major FRA test equipment manufactures, eliminating vendor lock-in.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-20 text-center bg-slate-900 border border-slate-800 rounded-3xl mb-12">
+        <p class="text-[10px] text-sky-500 font-bold uppercase tracking-widest mb-2 font-mono">DETECTION</p>
+        <h3 class="text-3xl font-bold text-white mb-16 tracking-tight leading-normal max-w-3xl mx-auto">Analyze mechanical faults in seconds</h3>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="bg-background border border-slate-800 p-8 rounded-2xl space-y-3">
+                <i data-lucide="rotate-3d" class="w-8 h-8 text-sky-400 mx-auto"></i>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Winding Deformation</h4>
+                <p class="text-xs text-slate-500 font-mono">Mid-frequency (10kHz-500kHz)</p>
+            </div>
+            <div class="bg-background border border-slate-800 p-8 rounded-2xl space-y-3">
+                <i data-lucide="radio" class="w-8 h-8 text-sky-400 mx-auto"></i>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Core Displacement</h4>
+                <p class="text-xs text-slate-500 font-mono">Low-frequency (20Hz-2kHz)</p>
+            </div>
+            <div class="bg-background border border-slate-800 p-8 rounded-2xl space-y-3">
+                <i data-lucide="zap-off" class="w-8 h-8 text-sky-400 mx-auto"></i>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Insulation Degradation</h4>
+                <p class="text-xs text-slate-500 font-mono">High-frequency (500kHz-2MHz)</p>
+            </div>
+            <div class="bg-background border border-slate-800 p-8 rounded-2xl space-y-3">
+                <i data-lucide="server" class="w-8 h-8 text-sky-400 mx-auto"></i>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Loose Clamping</h4>
+                <p class="text-xs text-slate-500 font-mono">Broad spectrum deviation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-xl mx-auto px-6 py-20 text-center">
+        <h3 class="text-3xl font-bold text-white tracking-tight leading-normal mb-6 mx-auto">Ready to Analyze?</h3>
+        <p class="text-sm text-slate-400 max-w-sm mx-auto leading-relaxed mb-12">
+            Upload your FRA data and get AI-powered fault detection results in seconds.
+        </p>
+        
+        <div class="flex flex-col gap-6 items-center">
+            <a href="/analysis" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm px-10 py-4 rounded-lg btn-glow transition-all tracking-wider uppercase font-mono">
+                UPLOAD FRA DATA
+            </a>
+            <div class="flex gap-10">
+                <a href="/history" class="text-slate-500 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-all">ANALYSIS HISTORY</a>
+                <a href="/about" class="text-slate-500 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-all">SYSTEM ABOUT</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

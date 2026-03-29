@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set nav_active = 'analysis' %}
+{% block title %}Data Lake Explorer · AI-Based FRA System{% endblock %}
+
+{% block content %}
+<div class="card mb-6">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div>
+            <h2 class="text-xl font-bold text-white">Ensemble Training Data Lake</h2>
+            <p class="text-xs text-slate-400">Total of {{ total_count }} labeled training samples analyzed for model ensemble intelligence.</p>
+        </div>
+        <a href="/analysis" class="btn-secondary text-xs py-2">
+            <i data-lucide="arrow-left" width="14" height="14"></i> BACK TO DASHBOARD
+        </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+        {% for preview in previews %}
+        <div class="bg-card p-4 rounded-xl border border-slate-800 hover:border-sky-500/50 transition-all">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span class="text-[10px] font-bold text-sky-400 tracking-wider uppercase">{{ preview.name }}</span>
+                <span class="text-[10px] text-slate-500">{{ preview.size }}</span>
+            </div>
+            <img src="data:image/png;base64,{{ preview.plot }}" class="w-full rounded-lg border border-white/5 mb-3">
+            <div style="display: flex; gap: 0.5rem;">
+                <span class="text-[9px] px-2 py-0.5 bg-slate-800 rounded text-slate-400">IEEE C57.149</span>
+                <span class="text-[9px] px-2 py-0.5 bg-slate-800 rounded text-slate-400">500 Points</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% if total_count > previews|length %}
+    <div style="text-align: center; margin-top: 2.5rem; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p class="text-sm text-slate-500 mb-2">Showing {{ previews|length }} representative samples from a total of {{ total_count }} files.</p>
+        <p class="text-xs text-slate-600">Additional data processed by the ensemble engine for deep diagnostic learning.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

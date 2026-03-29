@@ -1,0 +1,14 @@
+[
+  {
+    "Error Comparison (MTL vs Measured)": "| Frequency Range | Range           | ASLE   | RMSE   |"
+  },
+  {
+    "Error Comparison (MTL vs Measured)": "| Low             | 20 Hz – 1 kHz   | 2.3427 | 0.0999 |"
+  },
+  {
+    "Error Comparison (MTL vs Measured)": "| Mid             | 1 kHz – 230 kHz | 4.8535 | 0.1583 |"
+  },
+  {
+    "Error Comparison (MTL vs Measured)": "| High            | 230 kHz – 2 MHz | 1.7340 | 0.0802 |"
+  }
+]

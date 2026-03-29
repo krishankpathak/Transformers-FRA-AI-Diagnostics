@@ -1,0 +1,32 @@
+[
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| Parameter | Actual | 10% Change | GA    | Error % | PSO   | Error % | 20% Change | GA   | Error % | PSO    | Error % |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| --------- | ------ | ---------- | ----- | ------- | ----- | ------- | ---------- | ---- | ------- | ------ | ------- |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| Rs [Ω]    | 0.5    | 0.5        | 0.46  | 8.00    | 0.54  | 8.00    | 0.5        | 0.46 | 8.00    | 0.52   | 4.00    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| Ls [μH]   | 20     | 20         | 21.9  | 9.50    | 21.88 | 9.40    | 20         | 22   | 10.00   | 21.5   | 7.50    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| Csh [pF]  | 37.27  | 33.5       | 35    | 4.48    | 34.8  | 3.88    | 29.8       | 31   | 4.03    | 30.8   | 3.36    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| Gsh [μS]  | 260.89 | 260.89     | 257   | 1.49    | 255.5 | 2.07    | 260.89     | 255  | 2.26    | 263    | 0.81    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| C0 [pF]   | 718    | 718        | 725   | 0.97    | 722.2 | 0.58    | 718        | 710  | 1.11    | 723.25 | 0.73    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| G0 [μS]   | 5026   | 5026       | 5002  | 0.48    | 5033  | 0.14    | 5026       | 5010 | 0.32    | 5035   | 0.18    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| CHL [pF]  | 50     | 55         | 50.9  | 7.45    | 53    | 3.64    | 60         | 54.1 | 9.83    | 55.9   | 6.83    |"
+  },
+  {
+    "10-kVA LV Winding with 10% and 20% Change in Csh and CHL": "| GHL [μS]  | 350    | 350        | 345.8 | 1.20    | 353.7 | 1.06    | 350        | 347  | 0.86    | 352    | 0.57    |"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "HV Winding Geometry Specifications": "| Parameter                           | Value    |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Height of conductor                 | 11.5 mm  |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Width of conductor                  | 2.4 mm   |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Insulation thickness (double-sided) | 0.5 mm   |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Turns per disc                      | 30       |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Number of discs                     | 96       |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Distance between discs              | 3 mm     |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Cooling duct                        | 5 mm     |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Inner radius                        | 374.5 mm |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Outer radius                        | 466.5 mm |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Total circumference                 | 79.17 m  |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Height of winding                   | 1437 mm  |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| HV–LV insulation                    | 20 mm    |"
+  },
+  {
+    "HV Winding Geometry Specifications": "| Relative permittivity (εr)          | 2.3      |"
+  }
+]

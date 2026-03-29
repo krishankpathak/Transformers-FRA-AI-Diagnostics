@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% set nav_active = 'analysis' %}
+{% block title %}Diagnostic Dashboard · AI-Based FRA System{% endblock %}
+
+{% block content %}
+<!-- Dashboard Stats Header -->
+<div class="analytics-grid" style="margin-bottom: 2rem;">
+    <div class="card" style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <div style="background: rgba(14, 165, 233, 0.1); padding: 0.75rem; border-radius: 12px; color: var(--accent);">
+            <i data-lucide="scan" width="24" height="24"></i>
+        </div>
+        <div>
+            <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Total Scans</p>
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 800;">{{ stats.total_scans|default(0) }}</h3>
+        </div>
+    </div>
+    <div class="card" style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <div style="background: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 12px; color: var(--danger);">
+            <i data-lucide="alert-triangle" width="24" height="24"></i>
+        </div>
+        <div>
+            <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Faults Detected</p>
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 800; color: var(--danger);">{{ stats.faults_detected|default(0) }}</h3>
+        </div>
+    </div>
+    <div class="card" style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <div style="background: rgba(16, 185, 129, 0.1); padding: 0.75rem; border-radius: 12px; color: #10b981;">
+            <i data-lucide="shield-check" width="24" height="24"></i>
+        </div>
+        <div>
+            <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">System Status</p>
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 800; color: #10b981;">{{ stats.system_health|default('Optimal') }}</h3>
+        </div>
+    </div>
+    <div class="card" style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <div style="background: rgba(245, 158, 11, 0.1); padding: 0.75rem; border-radius: 12px; color: #f59e0b;">
+            <i data-lucide="database" width="24" height="24"></i>
+        </div>
+        <div>
+            <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Data Lake</p>
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 800;">{{ stats.data_lake_count }} Files</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Data Lake Previews -->
+{% if lake_previews %}
+<div class="card" style="margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <p class="card-title" style="margin: 0;">Ensemble Training Data Previews (Graphs of All CSVs)</p>
+        <a href="/data-lake" style="font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase;">EXPLORE DATA LAKE</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+        {% for preview in lake_previews %}
+        <div style="text-align: center;">
+            <p style="font-size: 0.7rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase;">{{ preview.name }}</p>
+            <img src="data:image/png;base64,{{ preview.plot }}" style="width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="card" style="border-left: 4px solid var(--danger); margin-bottom: 1.5rem; background: rgba(239, 68, 68, 0.1);">
+    <p style="margin: 0; color: var(--danger); font-weight: 600;">
+        <i data-lucide="alert-circle" width="18" height="18" style="vertical-align: text-bottom; margin-right: 0.5rem;"></i>
+        {{ error }}
+    </p>
+</div>
+{% endif %}
+
+<div id="loading-overlay" class="loading-overlay" aria-live="polite" aria-busy="false">
+    <div class="spinner" role="presentation"></div>
+    <p style="font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">Initializing analysis engine...</p>
+</div>
+
+<div style="display: grid; grid-template-cols: 1.2fr 0.8fr; gap: 1.5rem;">
+    <!-- Upload Panel -->
+    <section class="upload-panel card" style="margin: 0;">
+        <p class="card-title">New Diagnostic Scan</p>
+        <div id="upload-zone" class="upload-zone" style="padding: 2.5rem 1.5rem;">
+            <div class="upload-icon" style="margin-bottom: 1rem;">
+                <i data-lucide="upload-cloud" width="48" height="48"></i>
+            </div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Transformer Data Ingest</h2>
+            <p class="lead" style="font-size: 0.85rem; margin-bottom: 2rem;">Upload FRA sweep data (.csv, .xlsx) for multi-model ensemble classification and expert system reporting.</p>
+
+            <form id="fra-upload-form" action="{{ url_for('analyze') }}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" id="file-input" class="file-input-hidden" required accept=".csv,.xlsx,.xls">
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button type="button" class="btn-secondary" id="browse-btn" style="padding: 0.75rem 1.5rem;">
+                        <i data-lucide="folder-open" width="18" height="18"></i>
+                        Select File
+                    </button>
+                    <button type="submit" class="btn-primary" style="padding: 0.75rem 2rem;">
+                        <i data-lucide="cpu" width="18" height="18"></i>
+                        Analyze Now
+                    </button>
+                </div>
+            </form>
+
+            <div id="file-preview" class="file-preview">
+                <div class="name" id="file-preview-name"></div>
+                <div class="meta" id="file-preview-meta"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="card" style="margin: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <p class="card-title" style="margin: 0;">Recent Scans</p>
+            <a href="/history" style="font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase;">View All</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            {% for report in recent_reports|default([]) %}
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="color: var(--accent);"><i data-lucide="file-text" width="18" height="18"></i></div>
+                    <div>
+                        <p style="margin: 0; font-size: 0.8rem; font-weight: 600; color: white; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ report.filename }}</p>
+                        <p style="margin: 0; font-size: 0.65rem; color: var(--text-muted);">{{ report.date }}</p>
+                    </div>
+                </div>
+                <a href="/download-report/{{ report.filename }}" target="_blank" style="color: var(--text-muted);"><i data-lucide="external-link" width="16" height="16"></i></a>
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                <i data-lucide="inbox" width="32" height="32" style="opacity: 0.2; margin-bottom: 0.5rem;"></i>
+                <p style="font-size: 0.8rem; margin: 0;">No recent activity</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='js/interactions.js') }}"></script>
+<script>
+(function () {
+    var input = document.getElementById("file-input");
+    var browse = document.getElementById("browse-btn");
+    var form = document.getElementById("fra-upload-form");
+    var overlay = document.getElementById("loading-overlay");
+    if (browse && input) {
+        browse.addEventListener("click", function () { input.click(); });
+    }
+    if (form && overlay) {
+        form.addEventListener("submit", function () {
+            overlay.setAttribute("aria-busy", "true");
+        });
+    }
+})();
+</script>
+{% endblock %}

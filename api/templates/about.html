@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>About | Intelligent Diagnostic System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap');
+        
+        body { 
+            background-color: #020617; /* Matches the image's dark bg */
+            color: #e2e8f0; /* Soft white/slate */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Futuristic font styles used for labels and technical terms */
+        .tech-font { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.65rem; font-weight: bold; }
+        .text-primary { color: #0ea5e9; } /* Blue/Sky accent color */
+        
+        /* The Card design (mid-slate background with subtle border) */
+        .glass-card { 
+            background-color: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(51, 65, 85, 0.5); 
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="p-8 md:p-16">
+    <div class="max-w-7xl mx-auto">
+        <a href="/" class="tech-font inline-flex items-center gap-2 px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition mb-12 text-slate-400">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Dashboard
+        </a>
+
+        <header class="text-center mb-16">
+            <p class="tech-font text-sky-500 mb-2">ABOUT THE PLATFORM</p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tighter leading-tight mb-4">
+                AI-Based Intelligent <span class="text-primary">Diagnostic</span> System
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+                Automated analysis of Frequency Response Analysis (FRA) data in power transformers using advanced machine learning and expert system logic.
+            </p>
+        </header>
+
+        <div class="space-y-12 mb-20">
+            <section class="glass-card p-8">
+                <h2 class="tech-font text-sky-400 mb-4">WHAT IS FRA?</h2>
+                <div class="text-sm text-slate-300 space-y-4 leading-relaxed">
+                    <p>Frequency Response Analysis (FRA) is a widely used diagnostic technique for assessing the internal mechanical and electrical condition of power transformers. A low-voltage signal is injected into transformer windings across a wide frequency range (typically 20 Hz to 2 MHz), and the resulting frequency response is recorded.</p>
+                    <p>Any deviation in the response pattern from expected behavior can indicate internal faults such as winding deformation, core displacement, insulation degradation, or structural changes from transportation stresses, short-circuit forces, or aging.</p>
+                </div>
+            </section>
+
+            <section class="glass-card p-8 border-l-4 border-amber-500">
+                <h2 class="tech-font text-amber-400 mb-6">THE CHALLENGE</h2>
+                <ul class="text-sm text-slate-300 space-y-3 list-inside list-disc">
+                    <li>FRA interpretation requires highly experienced engineers to identify subtle curve variations.</li>
+                    <li>Equipment from OMICRON, Megger, and Doble generate data in incompatible formats.</li>
+                    <li>Lack of standardization causes inefficiencies and delayed fault identification.</li>
+                    <li>Manual analysis leads to inconsistencies in maintenance decision-making.</li>
+                </ul>
+            </section>
+
+            <section class="glass-card p-8 border-l-4 border-emerald-500">
+                <h2 class="tech-font text-emerald-400 mb-6">OUR SOLUTION</h2>
+                <p class="text-sm text-slate-300 leading-relaxed mb-6">An AI-powered diagnostic platform that automatically processes and interprets FRA data from multiple vendors. The system uses a universal data parser, CNN-based classification models, and expert system logic to deliver accurate fault detection with actionable maintenance recommendations.</p>
+                <div class="grid grid-cols-2 gap-4 text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">
+                    <div class="p-3 bg-slate-900 rounded-lg">• Universal Multi-Format Data Ingestion</div>
+                    <div class="p-3 bg-slate-900 rounded-lg">• ML-powered Fault Classification</div>
+                    <div class="p-3 bg-slate-900 rounded-lg">• Real-time Health Scoring</div>
+                    <div class="p-3 bg-slate-900 rounded-lg">• Automated Maintenance Recommendations</div>
+                    <div class="p-3 bg-slate-900 rounded-lg">• Interactive Curve Visualization</div>
+                    <div class="p-3 bg-slate-900 rounded-lg">• Historical Trend Analysis</div>
+                </div>
+            </section>
+        </div>
+
+        <section class="mb-20">
+            <h2 class="text-2xl font-bold text-center mb-10 text-white tracking-tight">Technology Stack</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="glass-card p-6">
+                    <h4 class="tech-font text-sky-400 mb-4">AI / ML</h4>
+                    <ul class="text-xs text-slate-400 space-y-2 list-inside list-disc">
+                        <li>Convolutional Neural Networks (CNNs)</li>
+                        <li>Anomaly Detection Algorithms</li>
+                        <li>Pattern Recognition</li>
+                        <li>Transfer Learning</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-card p-6">
+                    <h4 class="tech-font text-sky-400 mb-4">SIGNAL PROCESSING</h4>
+                    <ul class="text-xs text-slate-400 space-y-2 list-inside list-disc">
+                        <li>FFT Analysis</li>
+                        <li>Correlation Coefficients</li>
+                        <li>Spectral Deviation Metrics</li>
+                        <li>Cross-Correlation</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-6">
+                    <h4 class="tech-font text-sky-400 mb-4">DATA HANDLING</h4>
+                    <ul class="text-xs text-slate-400 space-y-2 list-inside list-disc">
+                        <li>Universal Format Parser</li>
+                        <li>Multi-Vendor Support</li>
+                        <li>Standardized Data Pipeline</li>
+                        <li>Batch Processing</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-6 border-l-4 border-sky-500">
+                    <h4 class="tech-font text-sky-400 mb-4">EXPERT SYSTEM</h4>
+                    <ul class="text-xs text-slate-400 space-y-2 list-inside list-disc">
+                        <li>Rule-Based Inference</li>
+                        <li>Severity Classification</li>
+                        <li>Maintenance Recommendations</li>
+                        <li>Historical Trending</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="mt-20 pt-8 border-t border-slate-900 text-center">
+            <p class="tech-font text-slate-600 tracking-widest uppercase">FRA DIAGNOSTICS • SECURE INDUSTRIAL INTELLIGENCE</p>
+        </footer>
+    </div>
+    
+    <script>lucide.createIcons();</script>
+</body>
+</html>

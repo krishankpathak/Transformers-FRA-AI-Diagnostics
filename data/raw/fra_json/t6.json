@@ -1,0 +1,57 @@
+[
+  {
+    "(Measured vs FEM)": "| Frequency (Hz) | Measured (dB) | FEM (dB)                        |"
+  },
+  {
+    "(Measured vs FEM)": "| 20             | 0.00          | 0.50                            |"
+  },
+  {
+    "(Measured vs FEM)": "| 50             | -4.00         | -3.80                           |"
+  },
+  {
+    "(Measured vs FEM)": "| 100            | -8.50         | -8.20                           |"
+  },
+  {
+    "(Measured vs FEM)": "| 500            | -18.00        | -17.50                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 1",
+    "undefined": "000          | -22.00        | -21.50                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 5",
+    "undefined": "000          | -32.00        | -31.00                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 10",
+    "undefined": "000         | -38.00        | -36.50                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 50",
+    "undefined": "000         | -50.00        | -48.00                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 100",
+    "undefined": "000        | -58.00        | -55.50                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 200",
+    "undefined": "000        | -65.00        | -62.00                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 300",
+    "undefined": "000        | -60.00        | -68.00 *(anti-resonance shift)* |"
+  },
+  {
+    "(Measured vs FEM)": "| 500",
+    "undefined": "000        | -55.00        | -57.00                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 1",
+    "undefined": "000      | -48.00        | -49.50                          |"
+  },
+  {
+    "(Measured vs FEM)": "| 2",
+    "undefined": "000      | -45.00        | -46.00                          |"
+  }
+]
